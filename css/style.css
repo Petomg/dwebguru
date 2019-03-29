@@ -1,0 +1,25 @@
+.principal {
+  margin-top: 2em;
+}
+
+.titulo-principal{
+  font-family: 'Fugaz One', cursive;
+}
+
+.titulo-secundario {
+  margin-bottom: 1em;
+  font-family: 'Fugaz One', cursive;
+}
+
+.titulo-post {
+  font-family: 'Asap Condensed', sans-serif;
+  font-size: 1.7em;
+}
+
+body {
+  background-color:#EEE4FF;
+}
+
+.postcont{
+  margin-bottom: 4em;
+}
