@@ -23,3 +23,7 @@ body {
 .postcont{
   margin-bottom: 4em;
 }
+
+#delconfirmation {
+  margin-top: 1em;
+}

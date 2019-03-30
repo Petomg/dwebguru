@@ -44,6 +44,7 @@
             <div class="navbar-nav">
               <a class="nav-item nav-link" href="#">Vulnerabilities</a>
               <a class="nav-item nav-link" href="#">Books</a>
+              <a class="nav-item nav-link" href="all.php?tipo=startup">StartUp</a>
             </div>
           </div>
             <a class="nav-item nav-link active " href="addpost.php">

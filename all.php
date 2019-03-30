@@ -1,5 +1,22 @@
 <!DOCTYPE html>
-<?php  require_once "pdo.php"; ?>
+<?php  require_once "pdo.php";
+
+  $tipo = 0;
+  if(isset($_GET['tipo'])){
+    if($_GET['tipo'] == 'startup'){
+      $tipo = 1;
+
+      $stmt = $pdo->prepare("SELECT posts.id, posts.title, posts.descr, posts.code, posts.links FROM posts, tipo WHERE posts.tipo_id = tipo.tipo_id AND tipo.tipo_id = :id");
+      $stmt->execute(array(':id' => $tipo));
+
+    }else {
+      $stmt = $pdo->query("SELECT * FROM posts");
+    }
+
+  }else {
+    $stmt = $pdo->query("SELECT * FROM posts");
+  }
+?>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -19,6 +36,7 @@
             <div class="navbar-nav">
               <a class="nav-item nav-link" href="#">Vulnerabilities</a>
               <a class="nav-item nav-link" href="#">Books</a>
+              <a class="nav-item nav-link" href="all.php?tipo=startup">StartUp</a>
             </div>
           </div>
           <a class="nav-item nav-link active " href="addpost.php">
@@ -30,7 +48,7 @@
     <div class="container principal">
       <h2 class="titulo-secundario">All</h2>
       <?php
-      $stmt = $pdo->query("SELECT * FROM posts");
+
       while( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {   ?>
         <div class='card'>
         <a class='titulo-post card-header'><?php echo htmlentities($row['title']); ?></a>

@@ -29,6 +29,7 @@
             <div class="navbar-nav">
               <a class="nav-item nav-link" href="#">Vulnerabilities</a>
               <a class="nav-item nav-link" href="#">Books</a>
+              <a class="nav-item nav-link" href="all.php?tipo=startup">StartUp</a>
             </div>
           </div>
           <a class="nav-item nav-link active " href="addpost.php">
@@ -45,23 +46,29 @@
         <h3 class='titulo-post'>Description</h3>
         <p class='postcont'><?php echo htmlentities($row['descr']); ?></p>
         <h3 class='titulo-post'>Code</h3>
-        <pre class='postcont'><?php echo htmlentities($row['code']); ?></pre>
+        <pre class='postcont' id='postcode'><?php echo htmlentities($row['code']); ?></pre>
         <h3 class='titulo-post'>Links</h3>
-        <p class='postcont'><?php echo htmlentities($row['links']); ?></p>
+        <p class='postcont' id='postlinks'><?php echo htmlentities($row['links']); ?></p>
         <div class="btn-group" role="group" aria-label="Basic example">
-        <form action='deletepost.php' method='post'>
-        <input type='hidden' name='postid' id='deletebutton' value="<?php echo htmlentities($row['id']); ?>"/>
-        <button type='submit' class='btn btn-danger'> Delete </button>
+        <form action='deletepost.php' method='post' id='deleteform'>
+        <input type='hidden' name='postid' value="<?php echo htmlentities($row['id']); ?>"/>
         </form>
+        <button class='btn btn-danger' id='deletebutton'> Delete </button>
+
         <form action='updatepost.php' method='post'>
         <input type='hidden' name='postid' value='<?php echo htmlentities($row['id']); ?>'/>
         <button type='submit' class='btn btn-dark'> Update </button>
         </form>
         </div>
-    <?php  } ?>
+      <?php  } ?>
+        <div id="delconfirmation">
+
+        </div>
 
         </div>
 
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
   </body>
 </html>

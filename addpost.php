@@ -2,18 +2,26 @@
 <?php
 require_once "pdo.php";
 
-
+    $tipo_id = 0;
     if(isset($_POST["title"]) && isset($_POST["descr"])){
-        $sql = 'INSERT INTO posts(title, descr, code, links) VALUES (:title, :descr, :code, :links)';
+      if(isset($_POST['tipo'])){
+        if($_POST['tipo'] == 'startup') {
+          $tipo_id = 1;
+        }
+      }
+
+        $sql = 'INSERT INTO posts(title, descr, code, links, tipo_id) VALUES (:title, :descr, :code, :links, :tipo_id)';
 
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array(
           ':title' => $_POST['title'],
           ':descr' => $_POST['descr'],
           ':code' => $_POST['code'],
-          ':links' => $_POST['links']));
+          ':links' => $_POST['links'],
+          ':tipo_id' => $tipo_id
+        ));
 
-        echo "<script>alert('Post added successfully');</script>";
+
         header('Location:all.php');
         return;
 
@@ -42,6 +50,7 @@ require_once "pdo.php";
             <div class="navbar-nav">
               <a class="nav-item nav-link" href="#">Vulnerabilities</a>
               <a class="nav-item nav-link" href="#">Books</a>
+              <a class="nav-item nav-link" href="all.php?tipo=startup">StartUp</a>
             </div>
           </div>
             <a class="nav-item nav-link active " href="addpost.php">
@@ -71,6 +80,28 @@ require_once "pdo.php";
       <div class="form-group">
       <label for="links">Links</label>
       <input type="text" name="links" class="form-control" placeholder="example: https://es.wikipedia.org/wiki/Cross-site_scripting">
+      </div>
+
+      <div class="form-group">
+      <label>Tipo de Post</label><br>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="tipo" value="all" id="allcheck" checked>
+        <label class="form-check-label" for="allcheck">
+          All
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="tipo" value="startup" id="startupcheck">
+        <label class="form-check-label" for="startupcheck">
+          StartUp
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="tipo" id="bookscheck" value="books" disabled>
+        <label class="form-check-label" for="bookscheck">
+          Books
+        </label>
+      </div>
       </div>
 
       <button type="submit" class="btn btn-dark">Submit</button>
